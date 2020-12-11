@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import './meals_data.dart';
 import './widgets/bottom_bar.dart';
-import './pages/cookie_page.dart';
+import 'pages/meals_page.dart';
 import './theme.dart';
 import './models/category.dart';
 
@@ -68,7 +68,7 @@ class _MyHomePageState extends State<MyHomePage>
         .toList();
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: kbackgroundColor,
         elevation: 0.0,
         centerTitle: true,
         leading: IconButton(
@@ -102,6 +102,7 @@ class _MyHomePageState extends State<MyHomePage>
           Text(
             'Categories',
             style: TextStyle(
+              color: ktitleColor,
               fontFamily: 'VarelaRound',
               fontSize: 36.0,
               fontWeight: FontWeight.bold,
@@ -127,7 +128,7 @@ class _MyHomePageState extends State<MyHomePage>
               controller: _tabController,
               children: [
                 for (int i = 0; i < _availableCategories.length; i++)
-                  CookiePage(_availableCategories[i].id),
+                  MealsPage(_availableCategories[i].id),
               ],
             ),
           ),

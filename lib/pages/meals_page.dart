@@ -3,10 +3,10 @@ import 'package:cookie_store_app/models/meal.dart';
 import 'package:cookie_store_app/theme.dart';
 import 'package:flutter/material.dart';
 
-class CookiePage extends StatelessWidget {
+class MealsPage extends StatelessWidget {
   final String category;
 
-  CookiePage(this.category);
+  MealsPage(this.category);
 
   List<Meal> _availableMeals;
 
