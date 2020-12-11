@@ -1,63 +1,14 @@
+import 'package:cookie_store_app/meals_data.dart';
+import 'package:cookie_store_app/models/meal.dart';
 import 'package:cookie_store_app/theme.dart';
 import 'package:flutter/material.dart';
 
 class CookiePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xFFFCFAF8),
-      body: ListView(
-        children: <Widget>[
-          Container(
-            padding: EdgeInsets.only(right: 15.0),
-            width: MediaQuery.of(context).size.width - 30.0,
-            height: MediaQuery.of(context).size.height - 30.0,
-            child: GridView.count(
-              crossAxisCount: 2,
-              primary: false,
-              crossAxisSpacing: 10.0,
-              mainAxisSpacing: 10.0,
-              childAspectRatio: 0.8,
-              children: <Widget>[
-                _buildCard(
-                  'Cookie Cream',
-                  '\$5.99',
-                  'assets/images/cookie_cream2.png',
-                  true,
-                  false,
-                  context,
-                ),
-                _buildCard(
-                  'Cookie Mint',
-                  '\$3.99',
-                  'assets/images/cookie_mint2.png',
-                  false,
-                  false,
-                  context,
-                ),
-                _buildCard(
-                  'Cookie Choco',
-                  '\$2.99',
-                  'assets/images/cookie_choco2.png',
-                  false,
-                  false,
-                  context,
-                ),
-                _buildCard(
-                  'Cookie Classic',
-                  '\$1.99',
-                  'assets/images/cookie_classic2.png',
-                  false,
-                  true,
-                  context,
-                ),
-              ],
-            ),
-          )
-        ],
-      ),
-    );
-  }
+  final String category;
+
+  CookiePage(this.category);
+
+  List<Meal> _availableMeals;
 
   Widget _buildCard(String name, String price, String imgPath, bool added,
       bool isFavorite, context) {
@@ -99,8 +50,8 @@ class CookiePage extends StatelessWidget {
               Hero(
                 tag: imgPath,
                 child: Container(
-                  height: 100,
-                  width: 100,
+                  height: 85,
+                  width: 85,
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage(imgPath),
@@ -116,15 +67,16 @@ class CookiePage extends StatelessWidget {
                 price,
                 style: TextStyle(
                   color: ktextPriceColor,
-                  fontSize: 16.0,
+                  fontSize: 14.0,
                 ),
               ),
               Text(
                 name,
                 style: TextStyle(
                   color: ktextNameColor,
-                  fontSize: 16.0,
+                  fontSize: 14.0,
                 ),
+                textAlign: TextAlign.center,
               ),
               Padding(
                 padding: EdgeInsets.all(8.0),
@@ -177,6 +129,42 @@ class CookiePage extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final mealId = category;
+    _availableMeals = MEALS.where((meal) => meal.category == mealId).toList();
+    return Scaffold(
+      backgroundColor: Color(0xFFFCFAF8),
+      body: ListView(
+        children: <Widget>[
+          Container(
+            padding: EdgeInsets.only(right: 15.0),
+            width: MediaQuery.of(context).size.width - 30.0,
+            height: MediaQuery.of(context).size.height - 30.0,
+            child: GridView.count(
+              crossAxisCount: 2,
+              primary: false,
+              crossAxisSpacing: 10.0,
+              mainAxisSpacing: 10.0,
+              childAspectRatio: 0.8,
+              children: <Widget>[
+                for (int i = 0; i < _availableMeals.length; i++)
+                  _buildCard(
+                    _availableMeals[i].name,
+                    _availableMeals[i].price,
+                    _availableMeals[i].imgPath,
+                    _availableMeals[i].added,
+                    _availableMeals[i].isFavorite,
+                    context,
+                  )
+              ],
+            ),
+          )
+        ],
       ),
     );
   }

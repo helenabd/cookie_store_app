@@ -1,7 +1,10 @@
-import 'package:cookie_store_app/bottom_bar.dart';
-import 'package:cookie_store_app/cookie_page.dart';
-import 'package:cookie_store_app/theme.dart';
 import 'package:flutter/material.dart';
+
+import './meals_data.dart';
+import './widgets/bottom_bar.dart';
+import './pages/cookie_page.dart';
+import './theme.dart';
+import './models/category.dart';
 
 void main() {
   runApp(MyApp());
@@ -34,14 +37,35 @@ class _MyHomePageState extends State<MyHomePage>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
 
+  List<Category> _availableCategories;
+
   @override
   void initState() {
+    _availableCategories = CATEGORY
+        .map((category) => Category(id: category.id, title: category.title))
+        .toList();
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
+    _tabController =
+        TabController(length: _availableCategories.length, vsync: this);
+  }
+
+  Widget _buildTabBar(String title) {
+    return Tab(
+      child: Text(
+        title,
+        style: TextStyle(
+          fontFamily: 'VarelaRound',
+          fontSize: 21.0,
+        ),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    _availableCategories = CATEGORY
+        .map((category) => Category(id: category.id, title: category.title))
+        .toList();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -74,7 +98,7 @@ class _MyHomePageState extends State<MyHomePage>
       body: ListView(
         padding: EdgeInsets.only(left: 20.0),
         children: <Widget>[
-          SizedBox(height: 10.0),
+          SizedBox(height: 6.0),
           Text(
             'Categories',
             style: TextStyle(
@@ -83,7 +107,7 @@ class _MyHomePageState extends State<MyHomePage>
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(height: 10.0),
+          SizedBox(height: 8.0),
           TabBar(
             controller: _tabController,
             indicatorColor: Colors.transparent,
@@ -92,33 +116,8 @@ class _MyHomePageState extends State<MyHomePage>
             labelPadding: EdgeInsets.only(right: 40.0),
             unselectedLabelColor: kunselectedLabel,
             tabs: [
-              Tab(
-                child: Text(
-                  'Cookies',
-                  style: TextStyle(
-                    fontFamily: 'VarelaRound',
-                    fontSize: 21.0,
-                  ),
-                ),
-              ),
-              Tab(
-                child: Text(
-                  'Cookie Cake',
-                  style: TextStyle(
-                    fontFamily: 'VarelaRound',
-                    fontSize: 21.0,
-                  ),
-                ),
-              ),
-              Tab(
-                child: Text(
-                  'Ice Cream',
-                  style: TextStyle(
-                    fontFamily: 'VarelaRound',
-                    fontSize: 21.0,
-                  ),
-                ),
-              ),
+              for (int i = 0; i < _availableCategories.length; i++)
+                _buildTabBar(_availableCategories[i].title),
             ],
           ),
           Container(
@@ -127,9 +126,8 @@ class _MyHomePageState extends State<MyHomePage>
             child: TabBarView(
               controller: _tabController,
               children: [
-                CookiePage(),
-                CookiePage(),
-                CookiePage(),
+                for (int i = 0; i < _availableCategories.length; i++)
+                  CookiePage(_availableCategories[i].id),
               ],
             ),
           ),
