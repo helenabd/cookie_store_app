@@ -46,7 +46,7 @@ class BottomBar extends StatelessWidget {
                 children: <Widget>[
                   Icon(
                     Icons.search,
-                    color: kiconPrimaryColor,
+                    color: kiconSecundaryColor,
                   ),
                   Icon(
                     Icons.shopping_basket,

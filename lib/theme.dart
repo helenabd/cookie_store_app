@@ -15,3 +15,4 @@ const ktextNameColor = Color(0xFF575E67);
 const ktitleColor = Color(0xFF412828);
 const kbackgroundColor = Color(0xFFA13034);
 // const kbackgroundColor = Colors.white;
+const kTextDescriptionColor = Color(0xffACA9A9);

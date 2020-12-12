@@ -6,6 +6,7 @@ class Meal {
   final String name;
   final String price;
   final String imgPath;
+  final String description;
   final bool added;
   final bool isFavorite;
 
@@ -15,6 +16,7 @@ class Meal {
     @required this.name,
     @required this.price,
     @required this.imgPath,
+    @required this.description,
     @required this.added,
     @required this.isFavorite,
   });

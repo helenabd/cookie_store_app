@@ -1,21 +1,70 @@
 import 'package:cookie_store_app/meals_data.dart';
 import 'package:cookie_store_app/models/meal.dart';
+import 'package:cookie_store_app/pages/meals_detail_page.dart';
 import 'package:cookie_store_app/theme.dart';
 import 'package:flutter/material.dart';
 
 class MealsPage extends StatelessWidget {
   final String category;
+  final String categoryTitle;
 
-  MealsPage(this.category);
+  MealsPage(this.category, this.categoryTitle);
 
   List<Meal> _availableMeals;
 
+  @override
+  Widget build(BuildContext context) {
+    final mealId = category;
+    _availableMeals = MEALS.where((meal) => meal.category == mealId).toList();
+    return Scaffold(
+      backgroundColor: Color(0xFFFCFAF8),
+      body: ListView(
+        children: <Widget>[
+          Container(
+            padding: EdgeInsets.only(right: 15.0),
+            width: MediaQuery.of(context).size.width - 30.0,
+            height: MediaQuery.of(context).size.height - 30.0,
+            child: GridView.count(
+              crossAxisCount: 2,
+              primary: false,
+              crossAxisSpacing: 10.0,
+              mainAxisSpacing: 10.0,
+              childAspectRatio: 0.8,
+              children: <Widget>[
+                for (int i = 0; i < _availableMeals.length; i++)
+                  _buildCard(
+                    _availableMeals[i].name,
+                    _availableMeals[i].price,
+                    _availableMeals[i].imgPath,
+                    _availableMeals[i].added,
+                    _availableMeals[i].isFavorite,
+                    categoryTitle,
+                    _availableMeals[i].description,
+                    context,
+                  )
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
   Widget _buildCard(String name, String price, String imgPath, bool added,
-      bool isFavorite, context) {
+      bool isFavorite, String category, String description, context) {
     return Padding(
       padding: EdgeInsets.only(top: 5.0, bottom: 5.0, left: 5.0, right: 5.0),
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => MealsDetailPage(
+                    category: category,
+                    name: name,
+                    price: price,
+                    imgPath: imgPath,
+                    description: description,
+                  )));
+        },
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15.0),
@@ -64,7 +113,7 @@ class MealsPage extends StatelessWidget {
                 height: 7.0,
               ),
               Text(
-                price,
+                '\$' + price,
                 style: TextStyle(
                   color: ktextPriceColor,
                   fontSize: 14.0,
@@ -129,42 +178,6 @@ class MealsPage extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final mealId = category;
-    _availableMeals = MEALS.where((meal) => meal.category == mealId).toList();
-    return Scaffold(
-      backgroundColor: Color(0xFFFCFAF8),
-      body: ListView(
-        children: <Widget>[
-          Container(
-            padding: EdgeInsets.only(right: 15.0),
-            width: MediaQuery.of(context).size.width - 30.0,
-            height: MediaQuery.of(context).size.height - 30.0,
-            child: GridView.count(
-              crossAxisCount: 2,
-              primary: false,
-              crossAxisSpacing: 10.0,
-              mainAxisSpacing: 10.0,
-              childAspectRatio: 0.8,
-              children: <Widget>[
-                for (int i = 0; i < _availableMeals.length; i++)
-                  _buildCard(
-                    _availableMeals[i].name,
-                    _availableMeals[i].price,
-                    _availableMeals[i].imgPath,
-                    _availableMeals[i].added,
-                    _availableMeals[i].isFavorite,
-                    context,
-                  )
-              ],
-            ),
-          )
-        ],
       ),
     );
   }

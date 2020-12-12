@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
+import './pages/meals_page.dart';
 import './meals_data.dart';
 import './widgets/bottom_bar.dart';
-import 'pages/meals_page.dart';
 import './theme.dart';
 import './models/category.dart';
+import './widgets/app_bar.dart';
 
 void main() {
   runApp(MyApp());
@@ -67,34 +68,7 @@ class _MyHomePageState extends State<MyHomePage>
         .map((category) => Category(id: category.id, title: category.title))
         .toList();
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: kbackgroundColor,
-        elevation: 0.0,
-        centerTitle: true,
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-            color: kprimaryColor,
-          ),
-          onPressed: () {},
-        ),
-        title: Text(
-          'Pickup',
-          style: TextStyle(
-            fontSize: 20.0,
-            color: kprimaryColor,
-          ),
-        ),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.notifications_none,
-              color: kprimaryColor,
-            ),
-            onPressed: () {},
-          )
-        ],
-      ),
+      appBar: appBar(context),
       body: ListView(
         padding: EdgeInsets.only(left: 20.0),
         children: <Widget>[
@@ -128,7 +102,8 @@ class _MyHomePageState extends State<MyHomePage>
               controller: _tabController,
               children: [
                 for (int i = 0; i < _availableCategories.length; i++)
-                  MealsPage(_availableCategories[i].id),
+                  MealsPage(_availableCategories[i].id,
+                      _availableCategories[i].title),
               ],
             ),
           ),
