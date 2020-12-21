@@ -18,7 +18,7 @@ Cookie Store
 
 ### Home Screen
 <pre>
-                                                <img src="readme/cookie_store.gif" alt="Home Screen" height="425">     
+                                           <img src="readme/cookie_store.gif" alt="Home Screen" height="425">     
 </pre>
 
 
