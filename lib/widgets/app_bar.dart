@@ -7,17 +7,17 @@ AppBar appBar(BuildContext context) {
     backgroundColor: kbackgroundColor,
     elevation: 0.0,
     centerTitle: true,
-    leading: IconButton(
-      icon: Icon(
-        Icons.arrow_back,
-        color: kprimaryColor,
-      ),
-      onPressed: () {
-        Navigator.of(context).pop();
-      },
-    ),
+    // leading: IconButton(
+    //   icon: Icon(
+    //     Icons.arrow_back,
+    //     color: kprimaryColor,
+    //   ),
+    //   onPressed: () {
+    //     Navigator.of(context).pop();
+    //   },
+    // ),
     title: Text(
-      'Pickup',
+      'Cookie Store',
       style: TextStyle(
         fontSize: 20.0,
         color: kprimaryColor,
