@@ -1,16 +1,51 @@
-# cookie_store_app
+<h1 align="center">
+<br>
+  <img src="readme/logo.png" alt="Cookie Store" width="120">
+<br>
+<br>
+Cookie Store
+</h1>
 
-A new Flutter project.
+<p align="center">📲 A cookie store app, showing categories screens. 📲</p>
 
-## Getting Started
+<p align="center">
+  <a href="https://opensource.org/licenses/MIT">
+    <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License MIT">
+  </a>
+</p>
 
-This project is a starting point for a Flutter application.
+## Screenshot 📷
 
-A few resources to get you started if this is your first Flutter project:
+### Home Screen
+<pre>
+                                                <img src="readme/cookie_store.gif" alt="Home Screen" height="425">     
+</pre>
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+-📌 **Category Cookie**
+<pre>
+                        <img src="readme/cookie_category.png" alt="Category Cookie" height="425">     <img src="readme/cookie_item.png" alt="Cookie Item" height="425">
+</pre>
+
+-📌 **Category Cupcake**
+<pre>
+                        <img src="readme/cupcake_category.png" alt="Category Cupcake" height="425">     <img src="readme/cupcake_item.png" alt="Cupcake Item" height="425">
+</pre>
+
+-📌 **Category Ice Cream**
+<pre>
+                        <img src="readme/icecream_category.png" alt="Category Ice Cream" height="425">     <img src="readme/icecream_item.png" alt="Ice Cream Item" height="425">
+</pre>
+
+
+## Features 🗃️
+This app features all the latest tools and practices in mobile development!
+
+- **Flutter** 
+- **Http Request**
+- **Bottom App Bar** 
+- **JSON**
+
+## License 📃
+
+This project is licensed under the MIT License - see the [LICENSE](https://opensource.org/licenses/MIT) page for details.
